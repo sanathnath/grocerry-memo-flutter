@@ -36,10 +36,11 @@ class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
+      body: Column(
+        children: [
+          Expanded(child: WidgetList()),
+        ],
       ),
-      body: WidgetList(),
       floatingActionButton: FloatingActionButton(
         onPressed: (){
           showBottomSheet(context);
@@ -52,9 +53,13 @@ class _MyHomePageState extends State<MyHomePage> {
 
   Future<void> showBottomSheet(BuildContext context) async {
     showModalBottomSheet(
+      isScrollControlled: true,
       context: context,
       builder: (context){
-        return WidgetAddItem();
+        return Padding(padding: EdgeInsets.only(
+            bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: WidgetAddItem(),
+        );
       }
     );
   }
